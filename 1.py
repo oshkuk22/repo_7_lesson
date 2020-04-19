@@ -18,17 +18,23 @@ class Matrix:
     def __add__(self, other):
         result = []
         numbers = []
-        for i in range(len(self.__list_matrix)):
-            for j in range(len(self.__list_matrix[0])):
-                sum_ = other.__list_matrix[i][j] + self.__list_matrix[i][j]
-                numbers.append(sum_)
-            result.append(numbers)
-            numbers = []
-        return Matrix(result)
+        if len(self.__list_matrix) == len(other.__list_matrix):
+            for i in range(len(self.__list_matrix)):
+                if len(self.__list_matrix[i]) == len(other.__list_matrix[i]):
+                    for j in range(len(self.__list_matrix[0])):
+                        sum_ = other.__list_matrix[i][j] + self.__list_matrix[i][j]
+                        numbers.append(sum_)
+                    result.append(numbers)
+                    numbers = []
+                else:
+                    raise TypeError('Can not add matrix of these dimensions')
+            return Matrix(result)
+        else:
+            raise TypeError('Can not add matrix of these dimensions')
 
 
 matrix_1 = Matrix([[1, 2, 3], [10, 23, 6], [7, 8, 2], [5, 8, 12]])
-matrix_2 = Matrix([[5, 5, 2], [9, 2, 16], [1, 3, 2], [8, 9, 2]])
+matrix_2 = Matrix([[5, 4, 2], [9, 2, 16], [1, 3, 2], [8, 9, 2]])
 print(matrix_1)
 print('\n\t+\n')
 print(matrix_2)
